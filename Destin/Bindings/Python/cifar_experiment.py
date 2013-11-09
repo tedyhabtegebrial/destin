@@ -4,7 +4,7 @@ Created on Wed Nov  6 20:52:28 2013
 
 @author: ted
 """
-
+import scipy.io
 import pydestin as pd
 import cv2.cv as cv
 import os
