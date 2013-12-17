@@ -118,8 +118,8 @@ public:
 		
 		for(int j=0;j<32;++j){
 			floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[0];//B
-            floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[1];//G
-            floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[2];//R
+            		floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[1];//G
+            		floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[2];//R
 			//std::cout<<floatBGR[--k]; // If uncommented they show you the kind of data you are dealing with i.e it should lie [0 to 255]....
 			//std::cout<<endl;			// ... in fact they did lie in the correct range
 				
