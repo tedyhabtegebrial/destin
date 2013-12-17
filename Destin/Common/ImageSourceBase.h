@@ -1,12 +1,18 @@
 #ifndef DST_IMAGE_SOURCE_BASE_H
 #define DST_IMAGE_SOURCE_BASE_H
 
-
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv/cv.h>
+#include <opencv/highgui.h>
 #include <vector>
 #include <opencv/cv.h>
 #include <macros.h>
 
 using namespace std;
+//using namespace cv;
 class ImageSourceBase {
 
 protected:
@@ -93,7 +99,56 @@ public:
 
 
 
-    /** Displays the given image to the user in a window.
+ float* combineChannels(){
+	cv::Mat colorIMAGE= colorMats[currentImage];
+	float floatBGR[3072]={0};
+	int k=0;
+	/*for(int i=0;i<32;++i){
+		
+		for(int j=0;j<32;++j){
+			cv::Vec3b intensity = colorIMAGE.at<cv::Vec3b>(j, i);
+			floatBGR[k++] = intensity.val[0];//B
+            floatBGR[k++] = intensity.val[1];//G
+            floatBGR[k++] = intensity.val[2];//R
+		
+				
+		}
+	}*/
+	for(int i=0;i<32;++i){
+		
+		for(int j=0;j<32;++j){
+			floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[0];//B
+            floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[1];//G
+            floatBGR[k++] = colorIMAGE.at<cv::Vec3b>(j, i)[2];//R
+			//std::cout<<floatBGR[--k]; // If uncommented they show you the kind of data you are dealing with i.e it should lie [0 to 255]....
+			//std::cout<<endl;			// ... in fact they did lie in the correct range
+				
+		}
+	}
+	
+   	FILE *filePtr;
+ 	
+   	filePtr = fopen("combinedBGR.txt","a+");
+ 	
+   	//for (i = 0; i < ( int(sizeof(*floatBGR)/sizeof(floatBGR[0]))); i++)
+	for (int i = 0; i < 3072; i++)	
+		fprintf(filePtr, "%f", floatBGR[i]);
+
+		fprintf(filePtr, "\n");
+		fclose(filePtr);
+	
+        return floatBGR;
+   }
+   /*void aa(float* a){
+	   for(int i=0;i<10;i++){
+		   std::cout<<a[i];
+		   std::cout<<endl;
+		   
+	   }
+	   
+   }*/
+  
+  /** Displays the given image to the user in a window.
       * A call to cv::waitKey() must be called by the user for it to show.
       * @param image_id - The image to show between 0 and 9999.
       *                   The image_id can be different from and does not
