@@ -82,16 +82,16 @@ public:
 
     void createMatFile(){
 	FILE *filePtr;
-	FILE *filePtr1;
+	//FILE *filePtr1;
 
 	filePtr=fopen("OutPutBeliefs.txt","w");
-	filePtr1=fopen("combinedBGR.txt","w");
+	//filePtr1=fopen("combinedBGR.txt","w");
 
 	fclose(filePtr);
-	fclose(filePtr1);
+	//fclose(filePtr1);
 
-	filePtr=fopen("OutPutBeliefs.txt","w");
-	fclose(filePtr);
+	//filePtr=fopen("OutPutBeliefs.txt","w");
+	//fclose(filePtr);
 	
 	
     }
